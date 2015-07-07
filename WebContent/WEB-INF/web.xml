@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+
+	<description>Water Bee</description>
+	<display-name>Water Bee</display-name>
+
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/servlet/mvc-servlet.xml</param-value>
+		</init-param>
+	</servlet>
+	
+<!-- 	<servlet>
+		<servlet-name>springmvcajax</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>"src/com/ge/energy/icam/webservice/User.java"
+			<param-name>contextConfigLocation</param-name>
+			<param-value>servlet/ajaxmvc-servlet.xml</param-value>
+		</init-param>
+	</servlet> -->
+	
+	<!-- 	<servlet-mapping>
+		<servlet-name>springmvcajax</servlet-name>
+		<url-pattern>/ajax/*</url-pattern>
+	</servlet-mapping> -->
+	
+	
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/htm/*</url-pattern>
+	</servlet-mapping>
+	
+
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/html-jsp/error.jsp</location>
+	</error-page>
+
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+
+	<context-param>
+		<param-name>maxInactiveTime</param-name>
+		<param-value>3600</param-value>
+	</context-param>
+	
+	
+</web-app>

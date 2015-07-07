@@ -1,0 +1,86 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+     http://www.springframework.org/schema/context 
+     http://www.springframework.org/schema/context/spring-context-3.1.xsd
+     http://www.springframework.org/schema/task 
+     http://www.springframework.org/schema/task/spring-task-3.1.xsd
+     http://www.springframework.org/schema/mvc 
+     http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
+	default-lazy-init="false" default-autowire="byName">
+
+	<!-- @Controller -->
+	<context:component-scan base-package="com.gee.gecs.cosmos.controller" />
+
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- Intercepting specific URL -->
+			<mvc:mapping path="/*cmd" />
+			<ref bean="authenticationModel" />
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/*Welcomepage-cc-cmd" />
+			<bean class="com.gee.gecs.cosmos.model.UserRoleModel" />
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/*cmd" />
+			<bean class="com.gee.gecs.cosmos.model.AuthorisationModel" />
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/*" />
+			<bean class="com.gee.gecs.cosmos.model.CrossSiteScriptFilterModel" />
+		</mvc:interceptor>
+
+	</mvc:interceptors>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+
+	<bean id="authenticationModel" class="com.gee.gecs.cosmos.model.AuthenticationModel">
+		<property name="_sSOEnabled" value="false" />
+	</bean>
+
+	<!-- AOP Exception aspects -->
+	<aop:aspectj-autoproxy />
+	<bean id="exceptionAspectHandler" class="com.gee.gecs.cosmos.aspect.ExceptionAspectHandler" />
+
+	<!-- Exception mapper -->
+	<bean class="com.gee.gecs.cosmos.aspect.ICAMExceptionHandler">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="com.gee.gecs.cosmos.exception.GenericException">genericErrorPage</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- Default ViewResolver -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/html-jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+
+	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" 
+		p:basename="i18n/messages" /> -->
+</beans>

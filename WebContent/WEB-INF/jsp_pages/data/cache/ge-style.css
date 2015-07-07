@@ -1,0 +1,72 @@
+html {
+    margin-bottom: 1px;
+    margin-top: 10px;
+}
+
+@font-face {
+	font-family: "ge-inspira-1";	
+	src: url('fonts/GEInspiraReg.eot'); /* IE */
+    src: url('fonts/GEInspiraReg.eot?') format('embedded-opentype'),
+         url('fonts/GEInspiraReg.woff') format('woff'),
+         url('fonts/GEInspiraReg.ttf') format('truetype'),
+         url('fonts/GEInspiraReg.svg#GEInspiraRegular') format('svg');
+}
+
+
+body {    
+	color: #000000;
+    font-family: ge-inspira-1,ge-inspira-2,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    height: auto;
+    margin: auto;
+    padding: auto;	
+    text-decoration: none;
+}
+
+
+a {
+    cursor: pointer;
+    outline: medium none;
+    text-decoration:none;
+	color: #3976b7;
+}
+
+
+img {
+    border: 0 none;
+    outline: medium none;
+}
+
+li{
+	margin-top: 5px;	
+}
+
+p {
+	margin: 2px;
+	padding: 3px 0;
+	color: #999999;
+}
+.ge_colors {
+	color: #FF9900;
+	font-size: 16px;
+	float: left;
+	margin-left:10px;
+	margin-top:20px;
+}
+.ge_logo{
+	float:left;
+}
+
+.bordered
+{
+	border-bottom: 1px solid #FF9900;
+	border-top: 1px solid #FF9900;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+#language_bar a
+{		
+	margin: 5px;
+	font-size: 14px;
+}
